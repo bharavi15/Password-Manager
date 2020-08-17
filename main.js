@@ -10,10 +10,10 @@ const database = require('./utils/database')
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
 const SUCCESS_STATUS = 'success'
-const LOGIN_HTML = 'login.html'
-const SAVE_PASSWORD_HTML = 'savePassword.html'
-const PASSWORD_LIST_HTML = 'passwordList.html'
-const SAVE_SERVICE_HTML = 'saveService.html'
+const LOGIN_HTML = './assets/html/login.html'
+const SAVE_PASSWORD_HTML = './assets/html/savePassword.html'
+const PASSWORD_LIST_HTML = './assets/html/passwordList.html'
+const SAVE_SERVICE_HTML = './assets/html/saveService.html'
 
 async function createWindow() {
 
