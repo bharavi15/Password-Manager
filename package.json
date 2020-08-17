@@ -1,0 +1,21 @@
+{
+	"name": "password-manager",
+	"version": "1.0.0",
+	"description": "",
+	"main": "main.js",
+	"scripts": {
+		"start": "electron .",
+		"package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=icons/icon-mac.icns --prune=true --out=release-builds",
+		"package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=icons/icon-win.ico --prune=true --out=release-builds --version-string.CompanyName=BL --version-string.FileDescription=BL --version-string.ProductName=\"Password Manager\"",
+		"package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --icon=icons/icon-linux.png --prune=true --out=release-builds"
+	},
+	"author": "Bharavi Lakhote",
+	"license": "MIT",
+	"dependencies": {
+		"bcryptjs": "^2.4.3"
+	},
+	"devDependencies": {
+		"electron": "^9.1.2",
+		"electron-packager": "^15.0.0"
+	}
+}

@@ -1,0 +1,4 @@
+node_modules
+.passMan.db
+release-builds
+dump.txt
