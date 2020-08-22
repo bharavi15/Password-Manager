@@ -6,11 +6,9 @@ const {
 } = require('./encryption')
 
 const crypto = require('crypto');
-const encryptionKey = process.env.ENCRYPTION_KEY || "MyDefaultKey"
-const hash = crypto.createHash('sha256')
-const key = hash.update(encryptionKey).digest('hex').slice(0, 32);
 
 const writeFile = async function (data) {
+	const key = getKey();
 	if (fs.existsSync(filename))
 		await fs.chmodSync(filename, "4777")
 	const encryptedText = encryptData(key, JSON.stringify(data))
@@ -20,11 +18,22 @@ const writeFile = async function (data) {
 }
 
 const readFile = async function () {
+	const key = getKey();
 	const fsdata = fs.readFileSync(filename, 'utf-8')
 	const decryptedData = JSON.parse(decryptData(key, fsdata))
 	return decryptedData
 }
+const checkFileExists = function () {
+	return fs.existsSync(filename)
+}
+
+const getKey = function () {
+	const hash = crypto.createHash('sha256')
+	const key = hash.update(global.enc_key).digest('hex').slice(0, 32);
+	return key;
+}
 module.exports = {
 	writeFile,
-	readFile
+	readFile,
+	checkFileExists
 }

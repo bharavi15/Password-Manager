@@ -1,6 +1,7 @@
 const {
 	readFile,
-	writeFile
+	writeFile,
+	checkFileExists
 } = require('./fileIO')
 const bcrypt = require('bcryptjs')
 var passwords = []
@@ -123,6 +124,9 @@ const checkAdminPassword = function (adminPass) {
 const checkIfPasswordExists = function () {
 	return dataWithPassword.adminPassword.length > 0
 }
+const checkIfDbExists = function () {
+	return checkFileExists()
+}
 module.exports = {
 	readAll,
 	writeAll,
@@ -131,5 +135,6 @@ module.exports = {
 	createAdminPassword,
 	checkAdminPassword,
 	deleteAll,
-	checkIfPasswordExists
+	checkIfPasswordExists,
+	checkIfDbExists
 }

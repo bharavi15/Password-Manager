@@ -31,8 +31,7 @@ async function createWindow() {
 	Menu.setApplicationMenu(null)
 
 	// Load app
-	let fileData = await database.readAll()
-	if (fileData.status === SUCCESS_STATUS)
+	if (database.checkIfDbExists())
 		win.loadFile(path.join(__dirname, LOGIN_HTML));
 	else
 		win.loadFile(path.join(__dirname, SAVE_PASSWORD_HTML));
@@ -46,11 +45,14 @@ app.on("ready", createWindow);
 
 
 ipcMain.on("savePassword", async (event, args) => {
+	global.enc_key = args.password
 	await database.createAdminPassword(args.password)
 	win.loadFile(path.join(__dirname, LOGIN_HTML));
 })
 
-ipcMain.on("adminLogin", (event, args) => {
+ipcMain.on("adminLogin", async (event, args) => {
+	global.enc_key = args.password
+	await database.readAll()
 	const isCorrect = database.checkAdminPassword(args.password)
 	console.log('Password is Correct?', isCorrect)
 	if (isCorrect) {
