@@ -39,6 +39,7 @@ function generateRandom(len) {
 	return str;
 }
 module.exports = {
+	generateRandom,
 	encryptData,
 	decryptData
 }

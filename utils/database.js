@@ -3,6 +3,9 @@ const {
 	writeFile,
 	checkFileExists
 } = require('./fileIO')
+const {
+	generateRandom
+} = require('./encryption')
 const bcrypt = require('bcryptjs')
 var passwords = []
 var dataWithPassword = {
@@ -43,9 +46,11 @@ const writeAll = async function () {
 const addOne = async function (service, password) {
 	try {
 		let obj = dataWithPassword.passwords.find(x => x.service === service);
+		let id = Date.now() + "-" + generateRandom(5)
 		let index = dataWithPassword.passwords.indexOf(obj);
 		if (index < 0) {
 			dataWithPassword.passwords.push({
+				id,
 				service,
 				password
 			})
@@ -65,9 +70,9 @@ const addOne = async function (service, password) {
 	}
 }
 
-const deleteOne = async function (service) {
+const deleteOne = async function (id) {
 	try {
-		let obj = dataWithPassword.passwords.find(x => x.service === service);
+		let obj = dataWithPassword.passwords.find(x => x.id === id);
 		let index = dataWithPassword.passwords.indexOf(obj);
 		if (index >= 0) {
 			dataWithPassword.passwords.splice(index, 1);

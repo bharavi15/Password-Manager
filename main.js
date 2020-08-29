@@ -103,6 +103,6 @@ ipcMain.on("checkIfPasswordExists", (event, args) => {
 })
 
 ipcMain.on("deleteOneService", async (event, args) => {
-	var dataToBeSent = await database.deleteOne(args.service)
+	var dataToBeSent = await database.deleteOne(args.id)
 	win.webContents.send("showMessage", dataToBeSent.message);
 })
