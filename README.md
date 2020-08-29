@@ -2,7 +2,7 @@
 
 Password Manager is a cross-platform desktop app written with help of [Node.js](https://nodejs.org) and [Electron](https://www.electronjs.org/).
 
-This app uses [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) Encryption algorithm in Cipher Block Chaining(CBC) mode for encrypting the passwords. It also generates new random Initialization Vector(IV) for encryption when saving passwords.
+This app uses [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) Encryption algorithm in Cipher Block Chaining(CBC) mode for encrypting the passwords. It's key is derived from password set by user. It also generates new random Initialization Vector(IV) for encryption when saving passwords.
 
 **It is best practice not to save passwords, but if you still have to, save them securely.**
 
@@ -28,7 +28,7 @@ cd Password-Manager && npm install
 ### Initial setup
 Set admin password when using the app for the first time.
 
-**Note- Saved passwords cannot be recovered if you forget admin password.**
+**Note- Saved passwords cannot be recovered if you forget admin password as that itself is the encryption key.**
 Please reset the app by deleting ```.passMan.db``` file.
 
 
