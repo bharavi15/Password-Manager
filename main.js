@@ -19,7 +19,7 @@ async function createWindow() {
 
 	// Create the browser window.
 	win = new BrowserWindow({
-		width: 800,
+		width: 900,
 		height: 600,
 		webPreferences: {
 			nodeIntegration: false, // is default value after Electron v5
@@ -69,15 +69,22 @@ ipcMain.on("getDetails", async (event, args) => {
 		win.webContents.send("setDetails", dataToBeSent.data);
 	else
 		win.webContents.send("showMessage", dataToBeSent.message);
-
 })
 
 ipcMain.on("saveOne", async (event, args) => {
-	var dataToBeSent = await database.addOne(args.service, args.password)
-	if (dataToBeSent.status === SUCCESS_STATUS)
-		win.loadFile(path.join(__dirname, PASSWORD_LIST_HTML));
-	else
-		win.webContents.send("showMessage", dataToBeSent.message);
+	const updates = Object.keys(args);
+	const allowedUpdates = ['service', 'username', 'password']
+	const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
+	if (isValidOperation) {
+		var dataToBeSent = await database.addOne(args)
+		if (dataToBeSent.status === SUCCESS_STATUS)
+			win.loadFile(path.join(__dirname, PASSWORD_LIST_HTML));
+		else
+			win.webContents.send("showMessage", dataToBeSent.message);
+	} else {
+		win.webContents.send("showMessage", "Invalid field sent!");
+	}
+
 })
 
 ipcMain.on("showHome", (event, args) => {

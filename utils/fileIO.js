@@ -1,25 +1,28 @@
 const filename = "./.passMan.db"
 const fs = require('fs');
+const fsPromises = fs.promises
 const {
 	encryptData,
 	decryptData
 } = require('./encryption')
 
 const crypto = require('crypto');
-
+let key = ""
 const writeFile = async function (data) {
-	const key = getKey();
+	if (key === "")
+		key = getKey();
 	if (fs.existsSync(filename))
-		await fs.chmodSync(filename, "4777")
+		fs.chmodSync(filename, "4777")
 	const encryptedText = encryptData(key, JSON.stringify(data))
-	await fs.writeFileSync(filename, encryptedText, 'utf-8')
-	await fs.chmodSync(filename, "4400")
+	await fsPromises.writeFile(filename, encryptedText, 'utf-8')
+	fs.chmodSync(filename, "4400")
 	return true
 }
 
 const readFile = async function () {
-	const key = getKey();
-	const fsdata = fs.readFileSync(filename, 'utf-8')
+	if (key === "")
+		key = getKey();
+	const fsdata = await fsPromises.readFile(filename, 'utf-8')
 	const decryptedData = JSON.parse(decryptData(key, fsdata))
 	return decryptedData
 }
@@ -29,8 +32,7 @@ const checkFileExists = function () {
 
 const getKey = function () {
 	const hash = crypto.createHash('sha256')
-	const key = hash.update(global.enc_key).digest('hex').slice(0, 32);
-	return key;
+	return hash.update(global.enc_key).digest('hex').slice(0, 32);
 }
 module.exports = {
 	writeFile,

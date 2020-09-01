@@ -43,16 +43,15 @@ const writeAll = async function () {
 		}
 	}
 }
-const addOne = async function (service, password) {
+const addOne = async function (args) {
 	try {
-		let obj = dataWithPassword.passwords.find(x => x.service === service);
-		let id = Date.now() + "-" + generateRandom(5)
-		let index = dataWithPassword.passwords.indexOf(obj);
+		const obj = dataWithPassword.passwords.find(x => (x.service === args.service && x.username === args.username));
+		const id = Date.now() + "-" + generateRandom(5)
+		const index = dataWithPassword.passwords.indexOf(obj);
 		if (index < 0) {
 			dataWithPassword.passwords.push({
 				id,
-				service,
-				password
+				...args
 			})
 			await writeAll()
 			return {
@@ -60,7 +59,7 @@ const addOne = async function (service, password) {
 				message: 'Service added successfully!'
 			}
 		} else {
-			throw new Error('Service name already exists!')
+			throw new Error('Username already exists!')
 		}
 	} catch (error) {
 		return {

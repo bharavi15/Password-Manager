@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Enter Service</title>
+	<title>Add new service</title>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js" type="text/javascript">
 	</script>
@@ -14,24 +14,23 @@
 	<script>
 		function sendDataToBackend() {
 			if (validate()) {
-				const service = encodeURIComponent(document.getElementById('service').value)
+				const service = encodeURIComponent(document.getElementById('service').value.trim())
+				const username = encodeURIComponent(document.getElementById('username').value.trim())
 				const password = encodeURIComponent(document.getElementById('password').value)
 				window.api.send("saveOne", {
 					service,
+					username,
 					password
 				});
-			} else {
-				document.getElementById('service').value = ''
-				document.getElementById('password').value = ''
 			}
 		}
 
 		function validate() {
 			console.log('validate called')
-			password = document.getElementById('password').value
-			service = document.getElementById('service').value.trim()
-			console.log('service=', service, 'confirm=', password)
-			const isMatch = (service.length > 0 && password.length > 0)
+			const password = document.getElementById('password').value
+			const username = document.getElementById('username').value.trim()
+			console.log('username=', username, 'confirm=', password)
+			const isMatch = (username.length > 0 && password.length > 0)
 			if (!isMatch)
 				document.getElementById("show-error").style.display = 'block'
 			else
@@ -39,19 +38,20 @@
 			return isMatch
 		}
 		document.addEventListener("DOMContentLoaded", function (event) {
-			document.getElementById('password').addEventListener("keyup", function (event) {
-				// Number 13 is the "Enter" key on the keyboard
-				if (event.keyCode === 13) {
-					// Cancel the default action, if needed
-					event.preventDefault();
-					// Trigger the button element with a click
-					document.getElementById("submitButton").click();
-				}
-			});
+			document.getElementById('username').addEventListener("keyup", isEnterPressed);
+			document.getElementById('password').addEventListener("keyup", isEnterPressed);
 		});
 
 		function showHome() {
 			window.api.send("showHome", "")
+		}
+
+		function isEnterPressed(event) {
+			// Number 13 is the "Enter" key on the keyboard
+			if (event.keyCode === 13) {
+				event.preventDefault();
+				document.getElementById("submitButton").click();
+			}
 		}
 
 		window.api.receive('showMessage', (data) => {
@@ -74,18 +74,29 @@
 		</div>
 	</nav>
 	<div class="container">
-		<div>
-			<label>Enter service</label>
-			<input type="text" id="service" autofocus required>
+		<div class="input-field s6">
+			<label>Service</label>
+			<input type="text" id="service">
+			<span class="helper-text">Please enter the service</span>
 		</div>
-		<div>
-			<label>Enter Password</label>
+		<br />
+		<div class="input-field">
+			<label>Username*</label>
+			<input type="text" id="username" required>
+			<span class="helper-text">Please enter the username</span>
+
+		</div>
+		<br />
+		<div class="input-field">
+			<label>Password*</label>
 			<input onkeyup="validate()" type="password" id="password" required>
+			<span class="helper-text">Please enter the password </span>
 		</div>
-		<label id="show-error" class="materialize-red-text" style="display:none">Service and Password cannot be
+		<br />
+		<label id="show-error" class="materialize-red-text" style="display:none">Username and Password cannot be
 			blank</label><br>
 		<a class="waves-effect waves-light btn" id="submitButton" onclick="sendDataToBackend()"> <i
-				class="material-icons right">save</i>Save</a>
+				class="material-icons left">save</i>Save</a>
 	</div>
 
 </body>
