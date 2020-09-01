@@ -32,21 +32,21 @@ Set admin password when using the app for the first time.
 Please reset the app by deleting ```.passMan.db``` file.
 
 
-![image](https://user-images.githubusercontent.com/26803384/90429180-d17bbe80-e0e2-11ea-9ebf-ba3e5f2ca3f6.png)
+![image](https://user-images.githubusercontent.com/26803384/91870733-abcee780-ec94-11ea-931c-56f74d1b9032.png)
 ***
 ### Login 
 Every time you start the app you'll have to login using admin password.
 
-![image](https://user-images.githubusercontent.com/26803384/90428745-118e7180-e0e2-11ea-98c2-ed45fc17d94c.png)
+![image](https://user-images.githubusercontent.com/26803384/91870189-5eeb1100-ec94-11ea-9399-0c4f12094e6a.png)
 ***
 ### Home page
 Here you can view already saved passwords or add new service. You can also update the admin password or delete all saved passwords.
-![image](https://user-images.githubusercontent.com/26803384/90422899-27e3ff80-e0d9-11ea-9889-cd9f681fee74.png)
+![image](https://user-images.githubusercontent.com/26803384/91870539-9fe32580-ec94-11ea-9d5c-c3b71065e00c.png)
 ***
 
 ### Add service
 Here you can enter the service for which you are saving the password and the password itself.
-![image](https://user-images.githubusercontent.com/26803384/90425017-b9a13c00-e0dc-11ea-903a-82cfe97ac3ee.png)
+![image](https://user-images.githubusercontent.com/26803384/91871132-c6a15c00-ec94-11ea-868d-60a5c5341bd3.png)
 ***
 
 ## Contributing
