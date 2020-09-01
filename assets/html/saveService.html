@@ -26,10 +26,8 @@
 		}
 
 		function validate() {
-			console.log('validate called')
 			const password = document.getElementById('password').value
 			const username = document.getElementById('username').value.trim()
-			console.log('username=', username, 'confirm=', password)
 			const isMatch = (username.length > 0 && password.length > 0)
 			if (!isMatch)
 				document.getElementById("show-error").style.display = 'block'
