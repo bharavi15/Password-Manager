@@ -36,30 +36,6 @@ async function createWindow() {
 	else
 		win.loadFile(path.join(__dirname, SAVE_PASSWORD_HTML));
 
-
-	const isWindows = process.platform === 'win32';
-	let needsFocusFix = false;
-	let triggeringProgrammaticBlur = false;
-
-	win.on('blur', (event) => {
-		if (!triggeringProgrammaticBlur) {
-			needsFocusFix = true;
-		}
-	})
-
-	win.on('focus', (event) => {
-		if (isWindows && needsFocusFix) {
-			needsFocusFix = false;
-			triggeringProgrammaticBlur = true;
-			setTimeout(function () {
-				win.blur();
-				win.focus();
-				setTimeout(function () {
-					triggeringProgrammaticBlur = false;
-				}, 20);
-			}, 20);
-		}
-	})
 	win.on('closed', function () {
 		app.quit();
 	});
