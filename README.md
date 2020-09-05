@@ -18,9 +18,13 @@ Use Git clone to clone into the repository.
 ```cmd
 git clone https://github.com/bharavi15/Password-Manager.git
 ```
-Then install the required dependencies 
+Install the required dependencies 
 ```cmd
 cd Password-Manager && npm install
+```
+Run Password-Manager using
+```cmd
+npm start
 ```
 
 ## Usage
