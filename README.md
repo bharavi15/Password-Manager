@@ -56,6 +56,6 @@ Here you can enter the service for which you are saving the password and the pas
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-This project uses Material Icons and [Materialize](https://materializecss.com/) for styling.
+This project uses [Material Icons](https://material.io/resources/icons/?style=baseline) and [Materialize](https://materializecss.com/) for styling.
 ## License
 The code from this repo is [MIT](https://choosealicense.com/licenses/mit/) licensed. 
