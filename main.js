@@ -5,6 +5,7 @@ const {
 	Menu
 } = require("electron");
 const path = require("path");
+const crypto = require('crypto');
 const database = require('./utils/database')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -45,13 +46,13 @@ app.on("ready", createWindow);
 
 
 ipcMain.on("savePassword", async (event, args) => {
-	global.enc_key = args.password
+	global.enc_key = crypto.createHash('sha256').update(args.password).digest('hex').slice(0, 32)
 	await database.createAdminPassword(args.password)
 	win.loadFile(path.join(__dirname, LOGIN_HTML));
 })
 
 ipcMain.on("adminLogin", async (event, args) => {
-	global.enc_key = args.password
+	global.enc_key = crypto.createHash('sha256').update(args.password).digest('hex').slice(0, 32)
 	await database.readAll()
 	const isCorrect = database.checkAdminPassword(args.password)
 	console.log('Password is Correct?', isCorrect)
