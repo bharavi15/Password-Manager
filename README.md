@@ -1,5 +1,7 @@
 # Password-Manager
 
+[![js-standard-style](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
+
 Password Manager is a cross-platform desktop app written with help of [Node.js](https://nodejs.org) and [Electron](https://www.electronjs.org/).
 
 This app uses [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) Encryption algorithm in Cipher Block Chaining(CBC) mode for encrypting the passwords. It's key is derived from password set by user. It also generates new random Initialization Vector(IV) for encryption when saving passwords.
