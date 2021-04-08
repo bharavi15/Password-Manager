@@ -2,6 +2,7 @@ const {
   app,
   BrowserWindow,
   ipcMain,
+  screen,
   Menu
 } = require('electron')
 const path = require('path')
@@ -17,10 +18,11 @@ const PASSWORD_LIST_HTML = './assets/html/passwordList.html'
 const SAVE_SERVICE_HTML = './assets/html/saveService.html'
 
 async function createWindow () {
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize
   // Create the browser window.
   win = new BrowserWindow({
-    width: 900,
-    height: 600,
+    width: parseInt(width * 0.75),
+    height: parseInt(height * 0.75),
     webPreferences: {
       nodeIntegration: false, // is default value after Electron v5
       contextIsolation: true, // protect against prototype pollution
