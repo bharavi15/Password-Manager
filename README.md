@@ -1,6 +1,10 @@
+
+
 # Password-Manager
 
 [![js-standard-style](https://cdn.rawgit.com/standard/standard/master/badge.svg)](https://github.com/standard/standard)
+
+**Please Note: This is developed for educational purposes only.**
 
 Password Manager is a cross-platform desktop app written with help of [Node.js](https://nodejs.org) and [Electron](https://www.electronjs.org/).
 
